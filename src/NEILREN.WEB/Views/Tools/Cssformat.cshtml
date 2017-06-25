@@ -1,0 +1,135 @@
+﻿@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+    ViewBag.Title = "CSS代码格式化工具 - 开发者工具箱";
+}
+<ul class="breadcrumb push-down-0">
+    <li><a href="#">首页</a></li>
+    <li>@Html.ActionLink("开发者工具箱", "", "Tools", new { }, new { })</li>
+    <li class="active">CSS代码格式化工具</li>
+</ul>
+<div class="page-title">
+    <h2><span class="fa fa-columns"></span> CSS代码格式化工具</h2>
+</div>
+<script language=JavaScript>
+    function $css() {
+        var elements = new Array();
+        for (var i = 0; i < arguments.length; i++) {
+            var element = arguments[i];
+            if (typeof element == 'string')
+                element = document.getElementById(element);
+            if (arguments.length == 1)
+                return element;
+            elements.push(element);
+        }
+        return elements;
+    }
+    function CSSencode(code) {
+        code = code.replace(/\r\n/ig, '');
+        code = code.replace(/(\s){2,}/ig, '$1');
+        code = code.replace(/\t/ig, '');
+        code = code.replace(/\n\}/ig, '\}');
+        code = code.replace(/\n\{\s*/ig, '\{');
+        code = code.replace(/(\S)\s*\}/ig, '$1\}');
+        code = code.replace(/(\S)\s*\{/ig, '$1\{');
+        code = code.replace(/\{\s*(\S)/ig, '\{$1');
+        return code;
+    }
+    function CSSdecode(code) {
+        code = code.replace(/(\s){2,}/ig, '$1');
+        code = code.replace(/(\S)\s*\{/ig, '$1 {');
+        code = code.replace(/\*\/(.[^\}\{]*)}/ig, '\*\/\n$1}');
+        code = code.replace(/\/\*/ig, '\n\/\*');
+        code = code.replace(/;\s*(\S)/ig, ';\n\t$1');
+        code = code.replace(/\}\s*(\S)/ig, '\}\n$1');
+        code = code.replace(/\n\s*\}/ig, '\n\}');
+        code = code.replace(/\{\s*(\S)/ig, '\{\n\t$1');
+        code = code.replace(/(\S)\s*\*\//ig, '$1\*\/');
+        code = code.replace(/\*\/\s*([^\}\{]\S)/ig, '\*\/\n\t$1');
+        code = code.replace(/(\S)\}/ig, '$1\n\}');
+        code = code.replace(/(\n){2,}/ig, '\n');
+        code = code.replace(/:/ig, ':');
+        code = code.replace(/  /ig, ' ');
+        return code;
+    }
+</script>
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-9">
+            <form class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading ui-draggable-handle">
+                        <h3 class="panel-title"><strong>CSS代码格式化工具</strong> -开发者工具箱</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-md-12 col-xs-12">请将CSS代码复制到下面表单中:</label>
+                            <div class="col-md-12 col-xs-12">
+                                <textarea class="form-control" rows="5" id="code" name="code" style="height:250px;">#b {
+	width:1200px;
+	padding:0 12px;
+	background:#FFF;
+	position:relative
+}
+.l {
+	width:844px;
+	float:left;
+	border-right:1px solid #DDD;
+	padding-right:10px;
+	position:relative
+}
+.m {
+	width:670px;
+	float:left;
+	border-right:1px solid #DDD;
+	padding-right:10px;
+	position:relative
+}
+.r {
+	width:336px;
+	float:right;
+	padding-bottom:200px
+}</textarea>
+                                <span class="help-block">可实现CSS代码格式化和CSS在线压缩</span>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <button type="button" id="beautify" class="btn btn-success" onclick="$css('code').value = CSSencode($css('code').value);">横向排列</button>
+                                <button type="button" class="btn btn-info" onclick="$css('code').value = CSSdecode($css('code').value);">竖向排列</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            CSS代码格式化工具 可以帮您把混乱的 CSS 代码进行整理、分行，整齐的显示出来，或者将回车、空格进行移除，将您的 CSS 代码压缩到最小。
+                            如果您需要的功能在工具箱中未找到，您可以点击页面最下方的“反馈”提交您的意见建议。或许网站下次更新就会为您开发一个小工具。
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="panel-body">
+                            <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+                            <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": { "bdSize": 16 }, "image": { "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16" }, "selectShare": { "bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"] } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <!-- 多说评论框 start -->
+                        <div class="ds-thread" data-thread-key="Cssformat" data-title="CSS代码格式化工具 - 开发者工具箱" data-url="//www.neilren.com/Tools/Cssformat"></div>
+                        <!-- 多说评论框 end -->
+                        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                        <script type="text/javascript">
+                            var duoshuoQuery = { short_name: "neilren" };
+                            (function () {
+                                var ds = document.createElement('script');
+                                ds.type = 'text/javascript'; ds.async = true;
+                                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                                ds.charset = 'UTF-8';
+                                (document.getElementsByTagName('head')[0]
+                                 || document.getElementsByTagName('body')[0]).appendChild(ds);
+                            })();
+                        </script>
+                        <!-- 多说公共JS代码 end -->
+                    </div>
+                </div>
+            </form>
+        </div>
+        @RenderPage("~/Views/Shared/_ToolsRigth.cshtml", new { })
+    </div>
+</div>

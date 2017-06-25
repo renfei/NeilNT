@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+    ViewBag.Title = "人民币大写在线转换工具 - 开发者工具箱";
+}
+<ul class="breadcrumb push-down-0">
+    <li><a href="#">首页</a></li>
+    <li>@Html.ActionLink("开发者工具箱", "", "Tools", new { }, new { })</li>
+    <li class="active">人民币大写在线转换工具</li>
+</ul>
+<div class="page-title">
+    <h2><span class="fa fa-columns"></span> 人民币大写在线转换工具</h2>
+</div>
+<script src="/Content/js/Tools/rmb.js"></script>
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-9">
+            <form class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading ui-draggable-handle">
+                        <h3 class="panel-title"><strong>人民币大写在线转换工具</strong> -开发者工具箱</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-md-12 col-xs-12">在线人民币大写在线转换工具</label>
+                            <div class="col-md-12 col-xs-12">
+                                <span class="help-block">转换方法：输入人民币金额的小写阿拉伯数字，例如1688.99，然后点击“转换为大写金额”按钮即可得转换成汉字。在输入数字的时候，可以包含小数点，也可以写成千进制，例如1,688.99（注意是英文逗号，而不是中文逗号）。</span>
+                                <div class="form-group">
+                                    <div class="col-md-12 col-xs-12">
+                                        <span class="help-block">小写金额：</span>
+                                        <input type="text" class="form-control" name="Digits" id="Digits" value="1,274.37">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    <div class="col-md-12 col-xs-12">
+                                        <button type="button" id="beautify" class="btn btn-success" onclick="Result.value = convertCurrency(Digits.value);">转为大写金额</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    <div class="col-md-12 col-xs-12">
+                                        <span class="help-block">大写金额：</span>
+                                        <input type="text" class="form-control" name="Result" id="Result" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            人民币金额用到的中文大写汉字如下：<br />
+                            零、壹、贰、叁、肆、伍、陆、柒、捌、玖、拾、佰、仟、万、亿。
+                        </p>
+                    </div>
+                    <div class="panel-footer">
+                        <!-- 多说评论框 start -->
+                        <div class="ds-thread" data-thread-key="RMB" data-title="人民币大写在线转换工具 - 开发者工具箱" data-url="//www.neilren.com/Tools/RMB"></div>
+                        <!-- 多说评论框 end -->
+                        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                        <script type="text/javascript">
+                            var duoshuoQuery = { short_name: "neilren" };
+                            (function () {
+                                var ds = document.createElement('script');
+                                ds.type = 'text/javascript'; ds.async = true;
+                                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                                ds.charset = 'UTF-8';
+                                (document.getElementsByTagName('head')[0]
+                                 || document.getElementsByTagName('body')[0]).appendChild(ds);
+                            })();
+                        </script>
+                        <!-- 多说公共JS代码 end -->
+                    </div>
+                </div>
+            </form>
+        </div>
+        @RenderPage("~/Views/Shared/_ToolsRigth.cshtml", new { })
+    </div>
+</div>

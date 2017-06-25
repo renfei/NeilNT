@@ -1,0 +1,131 @@
+﻿@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+    ViewBag.Title = "代码拼接工具 - 开发者工具箱";
+}
+<ul class="breadcrumb push-down-0">
+    <li><a href="#">首页</a></li>
+    <li>@Html.ActionLink("开发者工具箱", "", "Tools", new { }, new { })</li>
+    <li class="active">代码拼接工具</li>
+</ul>
+<div class="page-title">
+    <h2><span class="fa fa-columns"></span> 代码拼接工具</h2>
+</div>
+<script>
+    function Splicing() {
+        var C1arr = (document.getElementById("C1").value).split("\n");
+        var C2arr = (document.getElementById("C2").value).split("\n");
+        var C3arr = (document.getElementById("C3").value).split("\n");
+        var CM = document.getElementById("CM").value;
+        var CEobj = document.getElementById("CE");
+        if (document.getElementById("C1").value == "") { alert("参数【$1】是必填的，请更正"); return false; }
+        if (C2arr.length > 0 && C2arr.length != C1arr.length) { alert("参数【$2】与【$1】行数不相等，请更正"); return false; }
+        if (C3arr.length > 0 && C3arr.length != C1arr.length) { alert("参数【$3】与【$1】行数不相等，请更正"); return false; }
+        CEobj.value = "";
+        for (var i = 0; i < C1arr.length; i++) {
+            var code;
+            code = CM.replace("($1)", C1arr[i].toString().trim());
+            code = code.replace("($2)", (C2arr.length > i) ? C2arr[i].toString().trim() : "");
+            code = code.replace("($3)", (C2arr.length > i) ? C3arr[i].toString().trim() : "");
+            code = code + "\n";
+            CEobj.value = CEobj.value + code;
+        }
+    }
+    function SpliCler() {
+        document.getElementById("C1").value = "";
+        document.getElementById("C2").value = "";
+        document.getElementById("C3").value = "";
+    }
+</script>
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-9">
+            <form class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading ui-draggable-handle">
+                        <h3 class="panel-title"><strong>代码拼接工具</strong> -开发者工具箱</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4 col-xs-12">
+                                    <label class="col-md-12 col-xs-12">【$1】请在下框输入参数 $1:</label>
+                                    <textarea class="form-control" rows="5" id="C1" name="content" style="height:250px;">城市
+天气
+单位
+风级</textarea>
+                                </div>
+                                <div class="col-md-4 col-xs-12">
+                                    <label class="col-md-12 col-xs-12">【$2】请在下框输入参数 $2:</label>
+                                    <textarea class="form-control" rows="5" id="C2" name="content" style="height:250px;">String
+Double
+String
+Int32</textarea>
+                                </div>
+                                <div class="col-md-4 col-xs-12">
+                                    <label class="col-md-12 col-xs-12">【$2】请在下框输入参数 $2:</label>
+                                    <textarea class="form-control" rows="5" id="C3" name="content" style="height:250px;">City
+Weather
+Company
+Grade</textarea>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                    请在下方代码模板中输入您的代码模板，需要拼接上方参数的地方请使用“($1)”($2)”($3)”来代替。
+                                </p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 col-xs-12">
+                                    <label class="col-md-12 col-xs-12">请输入您的代码模板:(可多行)</label>
+                                    <textarea class="form-control" rows="5" id="CM" name="content" style="height:250px;">/// &lt;summary&gt;
+/// ($1)
+/// &lt;/summary&gt;
+public ($2) ($3) { get; set; }</textarea>
+                                </div>
+                                <div class="col-md-2 col-xs-12">
+                                    <label class="col-md-12 col-xs-12" style="text-align:center;">操作控制</label>
+                                    <button type="button" class="btn btn-success" style="width:100%;" onclick="return Splicing()">生成结果</button>
+                                    <button type="button" class="btn btn-info" style="width:100%;" onclick="SpliCler()">清空全部参数</button>
+                                </div>
+                                <div class="col-md-5 col-xs-12">
+                                    <label class="col-md-12 col-xs-12">生成结果:</label>
+                                    <textarea class="form-control" rows="5" id="CE" name="content" style="height:250px;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            代码拼接工具可以帮您快速完成重复性的拼接工作，开发灵感来自 马老师 的 MakeObjects 工具。
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="panel-body">
+                            <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+                            <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": { "bdSize": 16 }, "image": { "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16" }, "selectShare": { "bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"] } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <!-- 多说评论框 start -->
+                        <div class="ds-thread" data-thread-key="CodeSplicing" data-title="代码拼接工具 - 开发者工具箱" data-url="//www.neilren.com/Tools/CodeSplicing"></div>
+                        <!-- 多说评论框 end -->
+                        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                        <script type="text/javascript">
+                            var duoshuoQuery = { short_name: "neilren" };
+                            (function () {
+                                var ds = document.createElement('script');
+                                ds.type = 'text/javascript'; ds.async = true;
+                                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                                ds.charset = 'UTF-8';
+                                (document.getElementsByTagName('head')[0]
+                                 || document.getElementsByTagName('body')[0]).appendChild(ds);
+                            })();
+                        </script>
+                        <!-- 多说公共JS代码 end -->
+                    </div>
+                </div>
+            </form>
+        </div>
+        @RenderPage("~/Views/Shared/_ToolsRigth.cshtml", new { })
+    </div>
+</div>

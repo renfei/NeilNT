@@ -1,0 +1,134 @@
+﻿@model NEILREN.Models.SearchModel
+@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li class="active">搜索</li>
+</ul>
+
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span> Search (搜索)</h2>
+</div>
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row stacked">
+                        <div class="col-md-6">
+                            <form action="/Search/" class="input-group push-down-10">
+                                <span class="input-group-addon"><span class="fa fa-search"></span></span>
+                                <input type="text" class="form-control" name="wd" placeholder="搜索NEILREN.COM..." value="@ViewBag.Search" />
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">Search (搜索)</button>
+                                </div>
+                            </form>
+
+                            <span class="line-height-30">搜索<strong>NEILREN.COM</strong>站内内容。欢迎使用自主开发的搜索，目前未加入排序技术。</span>
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="pull-right push-down-10">
+                                <span class="line-height-30">NEILREN.COM 搜索引擎 V0.1</span>
+                            </div>
+
+                            <div class="line-height-30 pull-right text-right" style="width: 100%;">
+                                <a href="#">帮助与支持</a> - <a href="#">使用协议</a> - <a href="#">反馈</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="search-results">
+                @for (int i = 0; i < Model.Meta.Count; i++)
+                {
+                    switch (Model.Meta[i].TYPE)
+                    {
+                        case "article":
+                            <div class="sr-item">
+                                <a href="/Article/@Model.Meta[i].ID" class="sr-item-title">@Model.Meta[i].TITLE</a>
+                                <div class="sr-item-link">http://www.neilren.com/Article/@Model.Meta[i].ID</div>
+                                @if (Model.Meta[i].CONTENT.ToString().Length >= 120)
+                                {
+                                    <p>@Model.Meta[i].CONTENT.ToString().Substring(0, 120)</p>
+                                }
+                                else
+                                {
+                                    <p>@Model.Meta[i].CONTENT.ToString()</p>
+                                }
+                                <p class="sr-item-links"><a>@Model.Meta[i].DATE</a></p>
+                            </div>
+                                break;
+                        case "talk":
+                        <div class="sr-item">
+                            <a class="sr-item-title">说说状态 - @Model.Meta[i].DATE</a>
+                            <div class="sr-item-link">http://www.neilren.com/</div>
+                            <p>@Html.Raw(Model.Meta[i].CONTENT)</p>
+                            <p class="sr-item-links"><a>@Model.Meta[i].DATE</a></p>
+                        </div>
+                                break;
+                        case "album":
+                        <div class="sr-item">
+                            <a href="/Album/@Model.Meta[i].ID" class="sr-item-title">@Model.Meta[i].TITLE</a>
+                            <div class="sr-item-link">http://www.neilren.com/Album/@Model.Meta[i].ID</div>
+                            <p>
+                                @Html.Raw(Model.Meta[i].CONTENT)
+                            </p>
+                            <p class="sr-item-links"><a>@Model.Meta[i].DATE</a></p>
+                        </div>
+                                break;
+                        default:
+                                break;
+                    }
+                }
+            </div>
+            <ul class="pagination pagination-sm pull-right push-down-20">
+                @{
+                    int PageNum = ViewBag.PageNum;
+                    if (PageNum - 1 == 0)
+                    {
+                        <li class="disabled"><a href="/">«</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/Search/?wd=@ViewBag.Search&PageNum=@(PageNum - 1)">«</a></li>
+                    }
+                    for (int i = PageNum - 4; i < PageNum; i++)
+                    {
+                        if (i < 1)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            <li><a href="/Search/?wd=@ViewBag.Search&PageNum=@i">@i</a></li>
+                        }
+                    }
+                    <li class="active"><a href="#">@PageNum</a></li>
+                    for (int i = PageNum + 1; i < PageNum + 5; i++)
+                    {
+                        if (i > Model.Total)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            <li><a href="/Search/?wd=@ViewBag.Search&PageNum=@i">@i</a></li>
+                        }
+                    }
+                    if (PageNum >= Model.Total)
+                    {
+                        <li class="disabled"><a href="#">»</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/Search/?wd=@ViewBag.Search&PageNum=@(PageNum + 1)">»</a></li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+    ViewBag.Title = "Escape编码工具 - 开发者工具箱";
+}
+<ul class="breadcrumb push-down-0">
+    <li><a href="#">首页</a></li>
+    <li>@Html.ActionLink("开发者工具箱", "", "Tools", new { }, new { })</li>
+    <li class="active">Escape编码工具</li>
+</ul>
+<div class="page-title">
+    <h2><span class="fa fa-columns"></span> Escape编码工具</h2>
+</div>
+
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-9">
+            <form class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading ui-draggable-handle">
+                        <h3 class="panel-title"><strong>Escape编码工具</strong> -开发者工具箱</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-md-12 col-xs-12">请输入欲加密的字符串：</label>
+                            <div class="col-md-12 col-xs-12">
+                                <textarea class="form-control" rows="5" id="ipt" name="ipt" style="height:250px;">请把你需要加密的内容粘贴在这里。</textarea>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <button type="button" id="beautify" class="btn btn-success" onclick="jQuery('#ipt').val(escape(jQuery('#ipt').val()));">Escape编码</button>
+                                <button type="button" class="btn btn-info" onclick="jQuery('#ipt').val(unescape(jQuery('#ipt').val()));">Escape解码</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            小贴士：可多次加密和解密。 Escape采用ISO Latin字符集对指定的字符串进行编码。所有的空格符、标点符号、特殊字符以及其他非ASCII字符都将被转化成%xx格式的字符编码(xx等于该字符在字符集表里面的编码的16进制数字)。
+                        </p>
+                    </div>
+                    <div class="panel-footer">
+                        <!-- 多说评论框 start -->
+                        <div class="ds-thread" data-thread-key="Escape" data-title="Escape编码工具 - 开发者工具箱" data-url="//www.neilren.com/Tools/Escape"></div>
+                        <!-- 多说评论框 end -->
+                        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                        <script type="text/javascript">
+                            var duoshuoQuery = { short_name: "neilren" };
+                            (function () {
+                                var ds = document.createElement('script');
+                                ds.type = 'text/javascript'; ds.async = true;
+                                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                                ds.charset = 'UTF-8';
+                                (document.getElementsByTagName('head')[0]
+                                 || document.getElementsByTagName('body')[0]).appendChild(ds);
+                            })();
+                        </script>
+                        <!-- 多说公共JS代码 end -->
+                    </div>
+                </div>
+            </form>
+        </div>
+        @RenderPage("~/Views/Shared/_ToolsRigth.cshtml", new { })
+    </div>
+</div>

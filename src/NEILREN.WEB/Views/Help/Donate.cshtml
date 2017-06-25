@@ -1,0 +1,124 @@
+﻿@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li>@Html.ActionLink("帮助", "", "Help", new { }, new { })</li>
+    <li class="active">捐赠</li>
+</ul>
+<style>
+    .banner_donate {
+        background: url(/Content/img/banner_donate.jpg) no-repeat 0 0px;
+        background-size: cover;
+        padding: 2em 0 0 0;
+        position: relative;
+        text-align: center;
+        margin-bottom: 0;
+        min-height: 307px;
+    }
+
+    .container {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .testimonial-nfo h3 {
+        color: #FFF;
+        font-size: 40px;
+        font-weight: 300;
+        margin: 0;
+    }
+
+    .testimonial-nfo h5 {
+        color: #FFFFFF;
+        font-size: 14px;
+        margin: 0;
+        line-height: 1.8em;
+        font-weight: 300;
+    }
+
+        .testimonial-nfo h5 span {
+            display: block;
+        }
+
+    .testimonial-grid p {
+        font-size: 1.2em;
+        font-style: italic;
+        color: #FFF;
+        text-align: center;
+        width: 86%;
+        margin: 0em auto 0;
+        font-weight: 400;
+    }
+
+        .testimonial-grid p span {
+            font-size: .85em;
+            vertical-align: middle;
+        }
+
+    .profile {
+        background: ##e6e9ee;
+    }
+</style>
+<div class="page-title" style="padding:0">
+    <div class="banner_donate">
+        <div class="container">
+            <div class="testimonial-nfo">
+                <h3>Donate / 捐赠</h3>
+                <h5>Thank the donors for their trust and support. <span>感谢捐赠者们的信任与支持</span></h5>
+            </div>
+            <div class="testimonial-grids">
+                <div class="testimonial-grid">
+                    <p>
+                        <span>"</span>
+                        我们支持互联网的互助和自由精神，让每个人平等自由的享受互联网带来的便利，我们提供的服务和讯息永远免费开放的面向所有人。
+                        但维护这些项目需要必要的经费和开支，所以我们接受任何实名、署名、匿名的捐助，包括但不限于：财物、服务、代码等软硬件的捐赠与支持。
+                        <span> "</span>
+                    </p>
+                </div>
+            </div>
+            <div class="testimonial-nfo" style="margin-top:10px;">
+                <h5>您可以指定捐赠给某个项目或服务，并可随时调查您捐赠的财物去向</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>在您做出捐赠决定前，请您认真阅读以下说明：</p>
+                    <p>感谢您考虑捐赠我们，但在您做出捐赠决定前，您需要了解一些我们捐赠的条件和协议。</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body profile">
+                    <div class="profile-image">
+                        <img src="assets/images/users/user3.jpg" alt="Nadia Ali" />
+                    </div>
+                    <div class="profile-data">
+                        <div class="profile-data-title">Alipay / 支付宝</div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="contact-info">
+                        <p><small>账号</small><br />ren.fei@vip.163.com</p>
+                        <p><small>姓名</small><br />任霏</p>
+                        <p><small>Address</small><br />123 45 Street San Francisco, CA, USA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

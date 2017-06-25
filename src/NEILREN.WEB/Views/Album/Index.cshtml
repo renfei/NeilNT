@@ -1,0 +1,136 @@
+﻿@model NEILREN.Models.AlbumModel
+@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+    ViewBag.Title = Model.Album.AlbumTitle;
+}
+<ul class="breadcrumb push-down-0">
+    <li><a href="#">首页</a></li>
+    <li>@Html.ActionLink("网络相册", "", "Album", new { }, new { })</li>
+    <li class="active">@Model.Album.AlbumTitle</li>
+</ul>
+
+<div class="content-frame">
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span> 网络相册</h2>
+        </div>
+    </div>
+    <div class="content-frame-right" style="height: 921px;">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <h3>搜索</h3>
+                <form id="faqForm" action="/Search/">
+                    <div class="input-group">
+                        <input type="text" name="wd" class="form-control" id="faqSearchKeyword" placeholder="搜索...">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary" id="faqSearch">搜索</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="push-up-10"><strong>搜索范围:</strong> <span id="faqSearchResult">仅限NEILREN.COM站内搜索</span></div>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-body" style="padding:0;">
+                <a href="http://s.click.taobao.com/t?e=m%3D2%26s%3DPR%2BOlLaTKDQcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAkb7NYrIxeG1Y6k3rLjTWi9RPAWXiEIX1TxQHrjNFTalbSf%2B87ojqk2LgAZg3aAQSudn1BbglxZYxUhy8exlzcq9AmARIwX9K%2BnbtOD3UdznPV1H2z0iQv9NkKVMHClW0QbMqOpFMIvnvjQXzzpXdTHGJe8N%2FwNpGw%3D%3D" target="_blank" rel="nofollow">
+                    <img src="//cdn.neilren.com/Advert/Aliyun/440-180.gif" width="100%" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-frame-body content-frame-body-left">
+        <div class="gallery" id="links">
+            @for (int i = 0; i < Model.Album.PhotoList.Count; i++)
+            {
+                <a class="gallery-item" href="@Html.Encode(Model.Album.PhotoList[i].PhotoURL)" title="@Html.Raw(Model.Album.PhotoList[i].PhotoTitle)" @Html.Raw("data-gallery")>
+                    <div class="image">
+                        <img src="@Html.Raw(Model.Album.PhotoList[i].PhotoURL)" alt="@Html.Raw(Model.Album.PhotoList[i].PhotoTitle)" />
+                    </div>
+                    <div class="meta">
+                        <strong>@Model.Album.PhotoList[i].PhotoTitle</strong>
+                        @if (Model.Album.PhotoList[i].PhotoDesc.ToString().Length >= 30)
+                        {
+                            <span> @Model.Album.PhotoList[i].PhotoDesc.Substring(0, 30)</span>
+                        }
+                        else
+                        {
+                            <span> @Model.Album.PhotoList[i].PhotoDesc</span>
+                        }
+                    </div>
+                </a>
+            }
+        </div>
+
+        <ul class="pagination pagination-sm pull-right push-down-20 push-up-20">
+            @{
+                int PageNum = ViewBag.PageNum;
+                if (PageNum - 1 == 0)
+                {
+                    <li class="disabled"><a href="/">«</a></li>
+                }
+                else
+                {
+                    <li><a href="@Model.Album.AlbumID?PageNum=@(PageNum - 1) ">«</a></li>
+                }
+                for (int i = PageNum - 4; i < PageNum; i++)
+                {
+                    if (i < 1)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        <li><a href="@Model.Album.AlbumID?PageNum=@i">@i</a></li>
+                    }
+                }
+                <li class="active"><a href="#">@PageNum</a></li>
+                for (int i = PageNum + 1; i < PageNum + 5; i++)
+                {
+                    if (i > Model.Album.Total)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        <li><a href="@Model.Album.AlbumID?PageNum=@i">@i</a></li>
+                    }
+                }
+                if (PageNum >= Model.Total)
+                {
+                    <li class="disabled"><a href="#">»</a></li>
+                }
+                else
+                {
+                    <li><a href="@Model.Album.AlbumID?PageNum=@(PageNum + 1)">»</a></li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>      
+<script type="text/javascript" src="/Content/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+<script>
+    document.getElementById('links').onclick = function (event) {
+        event = event || window.event;
+        var target = event.target || event.srcElement;
+        var link = target.src ? target.parentNode : target;
+        var options = {
+            index: link, event: event, onclosed: function () {
+                setTimeout(function () {
+                    $("body").css("overflow", "");
+                }, 200);
+            }
+        };
+        var links = this.getElementsByTagName('a');
+        blueimp.Gallery(links, options);
+    };
+</script>

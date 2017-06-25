@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+    ViewBag.Title = "UTF-8编码转换工具 - 开发者工具箱";
+}
+<ul class="breadcrumb push-down-0">
+    <li><a href="#">首页</a></li>
+    <li>@Html.ActionLink("开发者工具箱", "", "Tools", new { }, new { })</li>
+    <li class="active">UTF-8编码转换工具</li>
+</ul>
+<div class="page-title">
+    <h2><span class="fa fa-columns"></span> UTF-8编码转换工具</h2>
+</div>
+
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-9">
+            <form class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading ui-draggable-handle">
+                        <h3 class="panel-title"><strong>UTF-8编码转换工具</strong> -开发者工具箱</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-12 col-xs-12">
+                                <span class="help-block">UTF-8编码在线转工具可以帮助你把中文转换成UTF-8编码，同时也支持把UTF-8编码过的还原成中文：</span>
+                                <textarea class="form-control" rows="5" id="contents" name="contents" style="height:250px;">请把你需要转换的内容粘贴在这里。</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 col-xs-12">
+                                <button type="button" class="btn btn-success" onclick="ConvUtf(contents, this);">中文 转换 UTF-8 ↓</button>
+                                <button type="button" class="btn btn-info" onclick="ResChinese(result, this);">UTF-8 还原 中文 ↑</button>
+                                <button type="button" class="btn btn-default" onclick="jQuery('#result').val('');">清空结果</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 col-xs-12">
+                                <textarea class="form-control" rows="5" id="result" name="result" style="height:250px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        function ConvUtf(obj, btn) {
+                            document.getElementById("result").value = obj.value.replace(/[^\u0000-\u00FF]/g, function ($0) { return escape($0).replace(/(%u)(\w { 4 })/gi, "&#x$2; ") });
+                        }
+                        function ResChinese(obj, btn) {
+                            document.getElementById("contents").value = unescape(obj.value.replace(/&#x/g, '%u').replace(/; /g, ''));
+                        }
+                    </script>
+
+                    <div class="panel-body">
+                        <p>
+                            UTF-8（8-bit Unicode Transformation Format）是一种针对Unicode的可变长度字符编码，又称万国码。由Ken Thompson于1992年创建。
+                            现在已经标准化为RFC 3629。UTF-8用1到6个字节编码UNICODE字符。用在网页上可以同一页面显示中文简体繁体及其它语言（如英文，日文，韩文）。
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="panel-body">
+                            <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+                            <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": { "bdSize": 16 }, "image": { "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16" }, "selectShare": { "bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"] } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <!-- 多说评论框 start -->
+                        <div class="ds-thread" data-thread-key="Utf8" data-title="UTF-8编码转换工具 - 开发者工具箱" data-url="//www.neilren.com/Tools/Utf8"></div>
+                        <!-- 多说评论框 end -->
+                        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                        <script type="text/javascript">
+                            var duoshuoQuery = { short_name: "neilren" };
+                            (function () {
+                                var ds = document.createElement('script');
+                                ds.type = 'text/javascript'; ds.async = true;
+                                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                                ds.charset = 'UTF-8';
+                                (document.getElementsByTagName('head')[0]
+                                 || document.getElementsByTagName('body')[0]).appendChild(ds);
+                            })();
+                        </script>
+                        <!-- 多说公共JS代码 end -->
+                    </div>
+                </div>
+            </form>
+        </div>
+        @RenderPage("~/Views/Shared/_ToolsRigth.cshtml", new { })
+    </div>
+</div>

@@ -1,0 +1,161 @@
+﻿@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+    ViewBag.Title = "开发者工具箱";
+}
+<ul class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li>@Html.ActionLink("关于", "", "About", new object { }, new object { })</li>
+    <li class="active">开发者工具箱</li>
+</ul>
+<div class="page-title">
+    <h2><span class="fa fa-columns"></span> 开发者工具箱</h2>
+</div>
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                <strong>开发者工具上线啦！</strong> 好用实用的小工具，还在增加中，如果你有好的建议，请点击页面下方的“反馈”，提交给我们，下次更新可能就有你的小工具哦。
+            </div>
+        </div>
+        <div class="col-md-3">
+            <a href="/Tools/Jsformat">
+                <div class="widget widget-default widget-item-icon" style="color:#000;">
+                    <div class="widget-item-left">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <div class="widget-data">
+                        <div class="widget-int num-count">JS/HTML</div>
+                        <div class="widget-title">JS/HTML格式化工具</div>
+                        <div class="widget-subtitle">简单易用的JS/HTML格式化工具</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Tools/Cssformat">
+                <div class="widget widget-default widget-item-icon" style="color:#000;">
+                    <div class="widget-item-left">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <div class="widget-data">
+                        <div class="widget-int num-count">CSS</div>
+                        <div class="widget-title">CSS代码格式化工具</div>
+                        <div class="widget-subtitle">可实现CSS代码格式化和CSS在线压缩</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Tools/CodeSplicing">
+                <div class="widget widget-default widget-item-icon" style="color:#000;">
+                    <div class="widget-item-left">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <div class="widget-data">
+                        <div class="widget-int num-count">代码拼接</div>
+                        <div class="widget-title">代码拼接工具</div>
+                        <div class="widget-subtitle">快速完成重复性的拼接工作</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Tools/MD5">
+                <div class="widget widget-default widget-item-icon" style="color:#000;">
+                    <div class="widget-item-left">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <div class="widget-data">
+                        <div class="widget-int num-count">MD5</div>
+                        <div class="widget-title">MD5加密解密工具</div>
+                        <div class="widget-subtitle">MD5字符串的加密解密</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Tools/UnixTime">
+                <div class="widget widget-default widget-item-icon" style="color:#000;">
+                    <div class="widget-item-left">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <div class="widget-data">
+                        <div class="widget-int num-count">时间戳</div>
+                        <div class="widget-title">Unix时间戳转换工具</div>
+                        <div class="widget-subtitle">Unix时间戳(timestamp)转换工具</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Tools/Utf8">
+                <div class="widget widget-default widget-item-icon" style="color:#000;">
+                    <div class="widget-item-left">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <div class="widget-data">
+                        <div class="widget-int num-count">UTF-8</div>
+                        <div class="widget-title">UTF-8编码转换工具</div>
+                        <div class="widget-subtitle">中文转换成UTF-8编码，UTF-8编码还原成中文</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Tools/Escape">
+                <div class="widget widget-default widget-item-icon" style="color:#000;">
+                    <div class="widget-item-left">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <div class="widget-data">
+                        <div class="widget-int num-count">Escape</div>
+                        <div class="widget-title">Escape编码工具</div>
+                        <div class="widget-subtitle">Escape采用ISO Latin字符集对指定的字符串进行编码</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Tools/Quchong">
+                <div class="widget widget-default widget-item-icon" style="color:#000;">
+                    <div class="widget-item-left">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <div class="widget-data">
+                        <div class="widget-int num-count">在线去重</div>
+                        <div class="widget-title">在线去重工具</div>
+                        <div class="widget-subtitle">去除文本列表中的重复项</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Tools/Daxiaoxie">
+                <div class="widget widget-default widget-item-icon" style="color:#000;">
+                    <div class="widget-item-left">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <div class="widget-data">
+                        <div class="widget-int num-count">字母大小写</div>
+                        <div class="widget-title">字母大小写转换工具</div>
+                        <div class="widget-subtitle">快速完成字母大小写转换工作</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Tools/RMB">
+                <div class="widget widget-default widget-item-icon" style="color:#000;">
+                    <div class="widget-item-left">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <div class="widget-data">
+                        <div class="widget-int num-count">人民币大写</div>
+                        <div class="widget-title">人民币大写转换工具</div>
+                        <div class="widget-subtitle">将阿拉伯数据转换为中文大写</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

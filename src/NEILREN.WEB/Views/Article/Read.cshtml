@@ -1,0 +1,118 @@
+﻿@model NEILREN.Models.ArticleModel
+@{
+    ViewBag.Title = Model.ArticleTitle;
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+}
+<ul class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li>@Html.ActionLink("博客", "", "Article", new { }, new { })</li>
+    <li><a href="/Article/Category/@Model.Category.CatID">@Model.Category.CatCnName</a></li>
+    <li class="active">文章</li>
+</ul>
+
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-body posts">
+                    <div class="post-item">
+                        <div class="post-title">
+                            @Html.Raw(Model.ArticleTitle)
+                        </div>
+                        <div class="post-date"><span class="fa fa-calendar"></span>@Html.Raw(Model.ArticleDate) / 分类：<a href="/Article/Category/@Model.Category.CatID">@Html.Raw(Model.Category.CatCnName)</a> / 作者：<a href="@Html.Raw(Model.AuthorLink)" target="_blank">@Html.Raw(Model.ArticleAuthor)</a> / 来源：<a href="@Html.Raw(Model.FromLink)" target="_blank">@Html.Raw(Model.ArticleFrom)</a></div>
+                        <div class="post-text">
+                            @Html.Raw(Model.ArticleContent)
+                        </div>
+                        @*<div class="post-row">
+                            <div class="post-info">
+                                <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+                                <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": { "bdSize": 16 }, "image": { "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16" }, "selectShare": { "bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"] } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                                @*<span class="fa fa-thumbs-up"></span> 15 - <span class="fa fa-eye"></span> 15,332 - <span class="fa fa-star"></span> 322
+                            </div>
+                        </div>*@
+                    </div>
+                    <h3 class="push-down-20">评论</h3>
+                    <!-- 多说评论框 start -->
+                    <div class="ds-thread" data-thread-key="@Html.Raw(Model.ArticleID)" data-title="@Html.Raw(Model.ArticleTitle)" data-url="//www.neilren.com/Article/@Html.Raw(Model.ArticleID)"></div>
+                    <!-- 多说评论框 end -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <h3>搜索</h3>
+                    <form id="faqForm" action="/Search/">
+                        <div class="input-group">
+                            <input type="text" name="wd" class="form-control" id="faqSearchKeyword" placeholder="搜索...">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" id="faqSearch">搜索</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="push-up-10"><strong>搜索范围:</strong> <span id="faqSearchResult">仅限NEILREN.COM站内搜索</span></div>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-body" style="padding:0;">
+                    <script type="text/javascript">
+                        /*百度广告-移动网页6:5*/
+                        var cpro_id = "u2448966";
+                    </script>
+                </div>
+                @if (Model.Category.CatID == "4")
+                {
+                    <div class="panel-body" style="padding:0;">
+                        <a href="http://www.antpool.com/?from=neilren.com" target="_blank" rel="nofollow">
+                            <img src="http://cdn.neilren.com/image/AD/antpool.jpg" width="100%" />
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="panel-body" style="padding:0;">
+                        <a href="http://s.click.taobao.com/t?e=m%3D2%26s%3DPR%2BOlLaTKDQcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAkb7NYrIxeG1Y6k3rLjTWi9RPAWXiEIX1TxQHrjNFTalbSf%2B87ojqk2LgAZg3aAQSudn1BbglxZYxUhy8exlzcq9AmARIwX9K%2BnbtOD3UdznPV1H2z0iQv9NkKVMHClW0QbMqOpFMIvnvjQXzzpXdTHGJe8N%2FwNpGw%3D%3D" target="_blank" rel="nofollow">
+                            <img src="//cdn.neilren.com/Advert/Aliyun/440-180.gif" width="100%" />
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>文章分类</h3>
+                    <div class="links">
+                        @for (int i = 0; i < Model.CategoryList.Count; i++)
+                        {
+                            <a href="/Article/Category/@Model.CategoryList[i].CatID">@Model.CategoryList[i].CatCnName</a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>最近的文章</h3>
+                    <div class="links small">
+                        @for (int i = 0; i < Model.RecentArticle.Count; i++)
+                        {
+                            <a href="/Article/@Model.RecentArticle[i].ArticleID">@Model.RecentArticle[i].ArticleTitle</a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>热评文章</h3>
+                    <div class="links small">
+                        <ul class="ds-top-threads" data-range="monthly" data-num-items="10" style="padding:0;"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>标签</h3>
+                    <ul class="list-tags push-up-10"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

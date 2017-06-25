@@ -1,0 +1,149 @@
+﻿@model NEILREN.Models.ArticleListModel
+@{
+    ViewBag.Title = Model.ArticleList[0].Category.CatCnName;
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+}
+<ul class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li>@Html.ActionLink("博客", "", "Article", new { }, new { })</li>
+    <li class="active">@Model.ArticleList[0].Category.CatCnName</li>
+</ul>
+
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-body posts">
+                    <a href="http://s.click.taobao.com/t?e=m%3D2%26s%3DPR%2BOlLaTKDQcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAkb7NYrIxeG1Y6k3rLjTWi9RPAWXiEIX1TxQHrjNFTalbSf%2B87ojqk2LgAZg3aAQSudn1BbglxZYxUhy8exlzcq9AmARIwX9K%2BnbtOD3UdznPV1H2z0iQv9NkKVMHClW0QbMqOpFMIvnvjQXzzpXdTHGJe8N%2FwNpGw%3D%3D" target="_blank" rel="nofollow">
+                        <img src="//cdn.neilren.com/Advert/Aliyun/950-90.gif" width="100%" />
+                    </a>
+                    <div class="row" style="padding-top:10px;">
+                        @for (var i = 0; i < Model.ArticleList.Count; i++)
+                        {
+                            <div class="col-md-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body panel-body-image">
+                                                <a href="/Article/@Model.ArticleList[i].ArticleID">
+                                                    <img src="@Model.ArticleList[i].ArticleImage" alt="TalkingAbout" />
+                                                </a>
+                                            </div>
+                                            <div class="panel-body">
+                                                <a href="/Article/@Model.ArticleList[i].ArticleID"><h3>@Model.ArticleList[i].ArticleTitle</h3></a>
+                                                @if (Model.ArticleList[i].ArticleContent.ToString().Length >= 120)
+                                                {
+                                                    <p>@Model.ArticleList[i].ArticleContent.ToString().Substring(0, 120)</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>@Model.ArticleList[i].ArticleContent.ToString()</p>
+                                                }
+                                            </div>
+                                            <div class="panel-footer text-muted">
+                                                <span class="fa fa-clock-o"></span> @Model.ArticleList[i].ArticleDate
+                                            </div>
+                                        </div>
+                                    </div>
+                        }
+                    </div>
+                    <ul class="pagination pagination-sm pull-right">
+                        @{
+                            int PageNum = ViewBag.PageNum;
+                            if (PageNum - 1 == 0)
+                            {
+                                <li class="disabled"><a href="/Article/Category/">«</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Article/Category/@Model.ArticleList[0].Category.CatID?PageNum=@(PageNum - 1)">«</a></li>
+                            }
+                            for (int j = PageNum - 4; j < PageNum; j++)
+                            {
+                                if (j < 1)
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    <li><a href="/Article/Category/@Model.ArticleList[0].Category.CatID?PageNum=@j">@j</a></li>
+                                }
+                            }
+                            <li class="active"><a href="#">@PageNum</a></li>
+                            for (int q = PageNum + 1; q < PageNum + 5; q++)
+                            {
+                                if (q > Model.Total)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    <li><a href="/Article/Category/@Model.ArticleList[0].Category.CatID?PageNum=@q">@q</a></li>
+                                }
+                            }
+                            if (PageNum >= Model.Total)
+                            {
+                                <li class="disabled"><a href="#">»</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Article/Category/@Model.ArticleList[0].Category.CatID?PageNum=@(PageNum + 1)">»</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <h3>搜索</h3>
+                    <form id="faqForm" action="/Search/">
+                        <div class="input-group">
+                            <input type="text" name="wd" class="form-control" id="faqSearchKeyword" placeholder="搜索...">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" id="faqSearch">搜索</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="push-up-10"><strong>搜索范围:</strong> <span id="faqSearchResult">仅限NEILREN.COM站内搜索</span></div>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-body" style="padding:0;">
+                    <a href="http://s.click.taobao.com/t?e=m%3D2%26s%3DPR%2BOlLaTKDQcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAkb7NYrIxeG1Y6k3rLjTWi9RPAWXiEIX1TxQHrjNFTalbSf%2B87ojqk2LgAZg3aAQSudn1BbglxZYxUhy8exlzcq9AmARIwX9K%2BnbtOD3UdznPV1H2z0iQv9NkKVMHClW0QbMqOpFMIvnvjQXzzpXdTHGJe8N%2FwNpGw%3D%3D" target="_blank" rel="nofollow">
+                        <img src="//cdn.neilren.com/Advert/Aliyun/440-180.gif" width="100%" />
+                    </a>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>文章分类</h3>
+                    <div class="links">
+                        @for (int i = 0; i < Model.ArticleList[0].CategoryList.Count; i++)
+                        {
+                            <a href="/Article/Category/@Model.ArticleList[0].CategoryList[i].CatID">@Model.ArticleList[0].CategoryList[i].CatCnName</a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>最近的文章</h3>
+                    <div class="links small">
+                        @for (int k = 0; k < Model.ArticleList[0].RecentArticle.Count; k++)
+                        {
+                            <a href="/Article/@Model.ArticleList[0].RecentArticle[k].ArticleID">@Model.ArticleList[0].RecentArticle[k].ArticleTitle</a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>热评文章</h3>
+                    <div class="links small">
+                        <ul class="ds-top-threads" data-range="monthly" data-num-items="10" style="padding:0;"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

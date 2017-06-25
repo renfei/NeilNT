@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+    ViewBag.Title = "字母大小写转换工具 - 开发者工具箱";
+}
+<ul class="breadcrumb push-down-0">
+    <li><a href="#">首页</a></li>
+    <li>@Html.ActionLink("开发者工具箱", "", "Tools", new { }, new { })</li>
+    <li class="active">字母大小写转换工具</li>
+</ul>
+<div class="page-title">
+    <h2><span class="fa fa-columns"></span> 字母大小写转换工具</h2>
+</div>
+<script language="javascript">
+        function englishConvert(str) {
+            var text = $("#content").val();
+            if (text == "" || text == null) {alert("请输入要转换的内容");return;}
+            if (str == "xx") {$("#content").val(text.toLowerCase());}
+            else { $("#content").val(text.toUpperCase());}
+        }
+</script>
+
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-9">
+            <form class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading ui-draggable-handle">
+                        <h3 class="panel-title"><strong>字母大小写转换工具</strong> -开发者工具箱</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-md-12 col-xs-12">请在下框输入您要转换的内容:</label>
+                            <div class="col-md-12 col-xs-12">
+                                <textarea class="form-control" rows="5" id="content" name="content" style="height:250px;">WWW.NEILren.com</textarea>
+                                <span class="help-block">简单易用的JS/HTML格式化工具</span>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <button type="button" id="beautify" class="btn btn-success" onclick="englishConvert('xx')">转换成小写</button>
+                                <button type="button" class="btn btn-info" onclick="englishConvert('dx')">转换成大写</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <!-- 多说评论框 start -->
+                        <div class="ds-thread" data-thread-key="Daxiaoxie" data-title="字母大小写转换工具 - 开发者工具箱" data-url="//www.neilren.com/Tools/Daxiaoxie"></div>
+                        <!-- 多说评论框 end -->
+                        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                        <script type="text/javascript">
+                            var duoshuoQuery = { short_name: "neilren" };
+                            (function () {
+                                var ds = document.createElement('script');
+                                ds.type = 'text/javascript'; ds.async = true;
+                                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                                ds.charset = 'UTF-8';
+                                (document.getElementsByTagName('head')[0]
+                                 || document.getElementsByTagName('body')[0]).appendChild(ds);
+                            })();
+                        </script>
+                        <!-- 多说公共JS代码 end -->
+                    </div>
+                </div>
+            </form>
+        </div>
+        @RenderPage("~/Views/Shared/_ToolsRigth.cshtml", new { })
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿#h5alert {
+    font-family: 'Microsoft Yahei UI Light', 'Microsoft Yahei', Verdana, Simsun, 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', 'HelveticaNeue-Light', 'Helvetica Neue', Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    background-color: #3c3c3c;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1000;
+    color: #fff;
+    display: none;
+    float: left;
+}
+#h5alert #show {
+    width: 595px;
+    height: 405px;
+    /*position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -202px;
+    margin-left: -300px;*/
+    margin:auto;
+    background-image: url(http://cdn.neilren.com/image/alert/h5alertsprite.png);
+    background-position: 0px -108px;
+    z-index: 1500;
+    padding: 50px 20px 20px 50px;
+    color: #000;
+}
+#h5alert #show #title {
+    font-size: 18px;
+    margin-top:20px;
+    text-align: center;
+}
+
+#h5alert #show #content {
+    border-top: 1px #CCC solid;
+    border-bottom: 1px #CCC solid;
+    padding: 10px 0 10px 0;
+    font-size: 12px;
+}
+#h5alert #show #content #tuijian {
+    width: 460px;
+    height: 100px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-image: url(http://cdn.neilren.com/image/alert/h5alertsprite.png);
+}
+#h5alert #show #content #tuijian a {
+    width: 75px;
+    height: 100px;
+    display: block;
+    float: left;
+    margin-left: 15px;
+}
+#h5alert #show #go {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 15px;
+}

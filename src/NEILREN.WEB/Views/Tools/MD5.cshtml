@@ -1,0 +1,137 @@
+﻿@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+    ViewBag.Title = "MD5加密解密工具 - 开发者工具箱";
+}
+<ul class="breadcrumb push-down-0">
+    <li><a href="#">首页</a></li>
+    <li>@Html.ActionLink("开发者工具箱", "", "Tools", new { }, new { })</li>
+    <li class="active">MD5加密解密工具</li>
+</ul>
+<div class="page-title">
+    <h2><span class="fa fa-columns"></span> MD5加密解密工具</h2>
+</div>
+<script src="/Content/js/Tools/md5.js"></script>
+<script>
+    function MD5() {
+        var str = $("#str").val();
+        $("#md516x").val(hex_md5(str).substring(8, 24));
+        $("#md516d").val(hex_md5(str).substring(8, 24).toUpperCase());
+        $("#md532x").val(hex_md5(str));
+        $("#md532d").val(hex_md5(str).toUpperCase());
+    }
+</script>
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-9">
+            <form class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading ui-draggable-handle">
+                        <h3 class="panel-title"><strong>MD5加密解密工具</strong> -开发者工具箱</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="panel panel-default tabs">
+                                <ul class="nav nav-tabs nav-justified">
+                                    <li class="active"><a href="#tab1" data-toggle="tab" aria-expanded="true">MD5加密</a></li>
+                                    <li class=""><a href="#tab2" data-toggle="tab" aria-expanded="false">MD5解密</a></li>
+                                    <li class=""><a href="#tab3" data-toggle="tab" aria-expanded="false">关于MD5加密解密</a></li>
+                                </ul>
+                                <div class="panel-body tab-content">
+                                    <div class="tab-pane active" id="tab1">
+                                        <label class="col-md-2 col-xs-12 control-label">请输入明文：</label>
+                                        <div class="col-md-10 col-xs-12">
+                                            <input type="text" class="form-control" id="str" value="NEILREN.COM">
+                                        </div>
+                                        <div class="panel-body">
+                                            <label class="col-md-2 col-xs-12 control-label"> </label>
+                                            <div class="col-md-10 col-xs-12">
+                                                <button type="button" id="beautify" class="btn btn-success" onclick="MD5()">MD5 加密</button>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-2 col-xs-12 control-label">16位小写：</label>
+                                        <div class="col-md-10 col-xs-12">
+                                            <input type="text" class="form-control" id="md516x">
+                                        </div>
+                                        <label class="col-md-2 col-xs-12 control-label">16位大写：</label>
+                                        <div class="col-md-10 col-xs-12">
+                                            <input type="text" class="form-control" id="md516d">
+                                        </div>
+                                        <label class="col-md-2 col-xs-12 control-label">32位小写：</label>
+                                        <div class="col-md-10 col-xs-12">
+                                            <input type="text" class="form-control" id="md532x">
+                                        </div>
+                                        <label class="col-md-2 col-xs-12 control-label">32位大写：</label>
+                                        <div class="col-md-10 col-xs-12">
+                                            <input type="text" class="form-control" id="md532d">
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab2">
+                                        <label class="col-md-2 col-xs-12 control-label">请输入MD5值：</label>
+                                        <div class="col-md-10 col-xs-12">
+                                            <input type="text" class="form-control" id="md5">
+                                        </div>
+                                        <div class="panel-body">
+                                            <label class="col-md-2 col-xs-12 control-label"> </label>
+                                            <div class="col-md-10 col-xs-12">
+                                                <button type="button" id="beautify" class="btn btn-success" onclick="MD5_PO()">破解 MD5</button>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <a href="#" class="tile tile-primary">
+                                                破解 MD5 功能正在开发，敬请期待。
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab3">
+                                        <p>
+                                            <h3>关于MD5加密解密工具箱</h3>
+                                            以下是我个人的见解：<br /><br />
+                                            MD5，Message Digest Algorithm，只是消息摘要算法，保证消息不被篡改，并不是什么加密算法，因为加密应该有对应的解密，而MD5是不能解密的，
+                                            我知道，有人就会和我说 王小云 博士破解了MD5，但是王博士所做的研究是散列碰撞，也就是知道明文，去找到另一个明文，两个不一样的明文MD5计算以后
+                                            得出的信息摘要是一样的，也就是篡改了消息，但能通过消息摘要算法的验证。注意，前提是已知一个明文，推算出其他明文，而并不能根据已经加密的MD5值去
+                                            推算出所有明文，所以从密文去破解明文，是不可能的。<br /><br />
+                                            <b>那你的MD5解密是怎么解密的？</b><br /><br />
+                                            我通过编程，让服务器在闲余时间不停的穷举密码，然后去计算密码的MD5，存入我的数据库，在您输入密文的时候，程序会去查数据库，如果找到一样的MD5值，
+                                            那么就找到了明文，实现的”解密“，类似于彩虹表碰撞，但并不完全一样。目前数据库中已经存储了100万以上的常用密码的MD5散列，并且明天还在计算增加。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <p>
+                            md5加密是一种不可逆的加密算法。
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="panel-body">
+                            <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+                            <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": { "bdSize": 16 }, "image": { "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16" }, "selectShare": { "bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"] } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <!-- 多说评论框 start -->
+                        <div class="ds-thread" data-thread-key="MD5" data-title="MD5加密解密工具 - 开发者工具箱" data-url="//www.neilren.com/Tools/MD5"></div>
+                        <!-- 多说评论框 end -->
+                        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                        <script type="text/javascript">
+                            var duoshuoQuery = { short_name: "neilren" };
+                            (function () {
+                                var ds = document.createElement('script');
+                                ds.type = 'text/javascript'; ds.async = true;
+                                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                                ds.charset = 'UTF-8';
+                                (document.getElementsByTagName('head')[0]
+                                 || document.getElementsByTagName('body')[0]).appendChild(ds);
+                            })();
+                        </script>
+                        <!-- 多说公共JS代码 end -->
+                    </div>
+                </div>
+            </form>
+        </div>
+        @RenderPage("~/Views/Shared/_ToolsRigth.cshtml", new { })
+    </div>
+</div>

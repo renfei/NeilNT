@@ -1,0 +1,108 @@
+﻿@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+    ViewBag.Title = "JS/HTML格式化工具 - 开发者工具箱";
+}
+<ul class="breadcrumb push-down-0">
+    <li><a href="#">首页</a></li>
+    <li>@Html.ActionLink("开发者工具箱", "", "Tools", new { }, new { })</li>
+    <li class="active">JS/HTML格式化工具</li>
+</ul>
+<div class="page-title">
+    <h2><span class="fa fa-columns"></span> JS/HTML格式化工具</h2>
+</div>
+<script src="/Content/js/Tools/base.js"></script>
+<script src="/Content/js/Tools/jsformat.js"></script>
+<script src="/Content/js/Tools/htmlformat.js"></script>
+<script type="text/javascript">
+    function do_js_beautify() {
+        document.getElementById('beautify').disabled = true;
+        js_source = document.getElementById('content').value.replace(/^\s+/, '');
+        tabsize = 4;
+        tabchar = ' ';
+        if (tabsize == 1) {
+            tabchar = '\t';
+        }
+        if (js_source && js_source.charAt(0) === '<') {
+            document.getElementById('content').value = style_html(js_source, tabsize, tabchar, 80);
+        } else {
+            document.getElementById('content').value = js_beautify(js_source, tabsize, tabchar);
+        }
+        document.getElementById('beautify').disabled = false;
+        return false;
+    }
+    function pack_js(base64) {
+        var input = document.getElementById('content').value;
+        var packer = new Packer;
+        if (base64) {
+            var output = packer.pack(input, 1, 0);
+        } else {
+            var output = packer.pack(input, 0, 0);
+        }
+        document.getElementById('content').value = output;
+    }
+    function Empty() {
+        document.getElementById('content').value = '';
+        document.getElementById('content').select();
+    }
+    function GetFocus() {
+        document.getElementById('content').focus();
+    }
+</script>
+
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-9">
+            <form class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading ui-draggable-handle">
+                        <h3 class="panel-title"><strong>JS/HTML格式化工具</strong> -开发者工具箱</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-md-12 col-xs-12">请在下框输入您要格式化的内容:</label>
+                            <div class="col-md-12 col-xs-12">
+                                <textarea class="form-control" rows="5" id="content" name="content" style="height:250px;">
+/*   粘贴你代码到这里并点击格式化按钮   */
+/*   例如格式化以下这段代码   */
+if('this_is'==/an_example/){do_something();}else{var a=b?(c%d):e[f];}
+                                </textarea>
+                                <span class="help-block">简单易用的JS/HTML格式化工具</span>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <button type="button" id="beautify" class="btn btn-success" onclick="return do_js_beautify()">格式化代码</button>
+                                <button type="button" class="btn btn-info" onclick="pack_js(0)">普通压缩</button>
+                                <button type="button" class="btn btn-info" onclick="pack_js(1)">加密压缩</button>
+                                <button type="button" class="btn btn-default" onclick="Empty();">清空结果</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            JS/HTML格式化工具 可以帮您把混乱的 HTML、JavaScript 代码进行整理、分行，整齐的显示出来，或者将回车、空格进行移除，将您的 HTML、JavaScript 代码压缩到最小。
+                            如果您需要的功能在工具箱中未找到，您可以点击页面最下方的“反馈”提交您的意见建议。或许网站下次更新就会为您开发一个小工具。
+                        </p>
+                    </div>
+                    <div class="panel-footer">
+                        <!-- 多说评论框 start -->
+                        <div class="ds-thread" data-thread-key="Jsformat" data-title="JS/HTML格式化工具 - 开发者工具箱" data-url="//www.neilren.com/Tools/Jsformat"></div>
+                        <!-- 多说评论框 end -->
+                        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                        <script type="text/javascript">
+                            var duoshuoQuery = { short_name: "neilren" };
+                            (function () {
+                                var ds = document.createElement('script');
+                                ds.type = 'text/javascript'; ds.async = true;
+                                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                                ds.charset = 'UTF-8';
+                                (document.getElementsByTagName('head')[0]
+                                 || document.getElementsByTagName('body')[0]).appendChild(ds);
+                            })();
+                        </script>
+                        <!-- 多说公共JS代码 end -->
+                    </div>
+                </div>
+            </form>
+        </div>
+        @RenderPage("~/Views/Shared/_ToolsRigth.cshtml", new { })
+    </div>
+</div>

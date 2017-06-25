@@ -1,0 +1,252 @@
+﻿@model NEILREN.Models.HomeModel
+@{
+    Layout = "~/Views/Shared/_NEILRENLayout.cshtml";
+}
+<div class="page-content-wrap">
+    <div class="row">
+        <div id="video" style="position: relative;top:0;left:0;">
+            <video autoplay loop poster="//cdn.neilren.com/video/home/edu.jpg" id="bgvid" style="width:100%;height: auto;left: 0;position: absolute;top: 0;width: 100%;z-index: 2;">
+                <source src="//cdn.neilren.com/video/home/edu.mp4" type="video/mp4">
+            </video>
+            <div id="videotext" style="position: absolute;z-index: 3;text-align:center;margin:auto;left:50%;top:20%;color:#FFF;">
+                <h1 id="videoh1" style="color:#FFF;">
+                    <span class="icon-NeilCat">
+
+                    </span>
+                    NEILREN.COM
+                </h1>
+                <span style="font-size:14px;">The future, belongs to us. Are you ready?<br />未来，属于我们。你，做好准备了吗？</span>
+            </div>
+        </div>
+        <!--Banner-->
+        @*<div class="flexslider">
+                <ul class="slides">
+                    <li>
+                        <video autoplay loop poster="//cdn.neilren.com/video/home/edu.jpg" id="bgvid" style="width:100%">
+                            <source src="//cdn.neilren.com/video/home/edu.mp4" type="video/mp4">
+                        </video>
+                    </li>
+                    <li style="background: url(/Content/img/banner/img1.jpg) 50% 0 no-repeat;"><a href="javascript:void(0)" style="width:100%;display:block;height:100%"></a></li>
+                    <li style="background: url(/Content/img/banner/img2.jpg) 50% 0 no-repeat;"><a href="javascript:void(0)" style="width:100%;display:block;height:100%"></a></li>
+                    <li style="background: url(/Content/img/banner/img3.jpg) 50% 0 no-repeat;"><a href="javascript:void(0)" style="width:100%;display:block;height:100%"></a></li>
+                </ul>
+
+            </div>*@
+    </div>
+    <script>
+        $(function () {
+            var width = $('#video').width();
+            $('#video').height((width / 1070) * 440);
+            if (width>990) {
+                $('#videoh1').css("font-size", "100px");
+            } else if (width > 790) {
+                $('#videoh1').css("font-size", "80px");
+            } else if (width > 590) {
+                $('#videoh1').css("font-size", "60px");
+            } else if (width < 400) {
+                $('#videoh1').css("font-size", "20px");
+            }
+            $('#videotext').css("margin-left", (0 - ($('#videotext').width() / 2)) + "px");
+        });
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                directionNav: false,
+                pauseOnAction: false
+            });
+        });
+        $(window).resize(function () {
+            $(function () {
+                var width = $('#video').width();
+                $('#video').height((width / 1070) * 440);
+                if (width > 990) {
+                    $('#videoh1').css("font-size", "100px");
+                } else if (width > 790) {
+                    $('#videoh1').css("font-size", "80px");
+                } else if (width > 590) {
+                    $('#videoh1').css("font-size", "60px");
+                } else if (width < 400) {
+                    $('#videoh1').css("font-size", "20px");
+                }
+                $('#videotext').css("margin-left", (0 - ($('#videotext').width() / 2)) + "px");
+            });
+        });
+    </script>
+    <!--Banner End-->
+    <div class="padding-top-10"></div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-body posts">
+                    <a href="http://s.click.taobao.com/t?e=m%3D2%26s%3DPR%2BOlLaTKDQcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAkb7NYrIxeG1Y6k3rLjTWi9RPAWXiEIX1TxQHrjNFTalbSf%2B87ojqk2LgAZg3aAQSudn1BbglxZYxUhy8exlzcq9AmARIwX9K%2BnbtOD3UdznPV1H2z0iQv9NkKVMHClW0QbMqOpFMIvnvjQXzzpXdTHGJe8N%2FwNpGw%3D%3D" target="_blank" rel="nofollow">
+                        <img src="//cdn.neilren.com/Advert/Aliyun/950-90.gif" width="100%" />
+                    </a>
+                    <div class="row" style="padding-top:10px;">
+                        @for (var i = 0; i < Model.Meta.Count; i++)
+                        {
+                            switch (Model.Meta[i].TYPE)
+                            {
+                                case "article":
+                                    <div class="col-md-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body panel-body-image">
+                                                <a href="/Article/@Model.Meta[i].ID">
+                                                    <img src="@Model.Meta[i].IMAGE" alt="TalkingAbout" />
+                                                </a>
+                                            </div>
+                                            <div class="panel-body">
+                                                <a href="/Article/@Model.Meta[i].ID"><h3>@Model.Meta[i].TITLE</h3></a>
+                                                @if (Model.Meta[i].CONTENT.ToString().Length >= 120)
+                                                {
+                                                    <p>@Model.Meta[i].CONTENT.ToString().Substring(0, 120)</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>@Model.Meta[i].CONTENT.ToString()</p>
+                                                }
+                                            </div>
+                                            <div class="panel-footer text-muted">
+                                                <span class="fa fa-clock-o"></span> @Model.Meta[i].DATE
+                                            </div>
+                                        </div>
+                                    </div>
+                                    break;
+                                case "talk":
+                                    //说说
+                                    <div class="col-md-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body panel-body-image">
+                                                <img src="@Model.Meta[i].IMAGE" alt="TalkingAbout" />
+                                            </div>
+                                            <div class="panel-body">
+                                                <p>@Html.Raw(Model.Meta[i].CONTENT)</p>
+                                            </div>
+                                            <div class="panel-footer text-muted">
+                                                <span class="fa fa-clock-o"></span> @Model.Meta[i].DATE
+                                            </div>
+                                        </div>
+                                    </div>
+                                    break;
+                                case "album":
+                                    //相册
+                                    <div class="col-md-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body panel-body-image">
+                                                <a href="/Article/@Model.Meta[i].ID">
+                                                    <img src="@Model.Meta[i].IMAGE" alt="TalkingAbout" />
+                                                </a>
+                                            </div>
+                                            <div class="panel-body">
+                                                <a href="/Article/@Model.Meta[i].ID"><h3>【相册】@Model.Meta[i].TITLE</h3></a>
+                                                <p>@Html.Raw(Model.Meta[i].CONTENT)</p>
+                                            </div>
+                                            <div class="panel-footer text-muted">
+                                                <span class="fa fa-clock-o"></span> @Model.Meta[i].DATE
+                                            </div>
+                                        </div>
+                                    </div>
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    </div>
+                    <ul class="pagination pagination-sm pull-right">
+                        @{
+                            int PageNum = ViewBag.PageNum;
+                            if (PageNum - 1 == 0)
+                            {
+                                <li class="disabled"><a href="/">«</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/NEILREN/Index/@(PageNum - 1)">«</a></li>
+                            }
+                            for (int i = PageNum - 4; i < PageNum; i++)
+                            {
+                                if (i < 1)
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    <li><a href="/NEILREN/Index/@i">@i</a></li>
+                                }
+                            }
+                            <li class="active"><a href="#">@PageNum</a></li>
+                            for (int i = PageNum + 1; i < PageNum + 5; i++)
+                            {
+                                if (i > Model.Total)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    <li><a href="/NEILREN/Index/@i">@i</a></li>
+                                }
+                            }
+                            if (PageNum >= Model.Total)
+                            {
+                                <li class="disabled"><a href="#">»</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/NEILREN/Index/@(PageNum + 1)">»</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <h3>搜索</h3>
+                    <form id="faqForm" action="/Search/">
+                        <div class="input-group">
+                            <input type="text" name="wd" class="form-control" id="faqSearchKeyword" placeholder="搜索...">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" id="faqSearch">搜索</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="push-up-10"><strong>搜索范围:</strong> <span id="faqSearchResult">仅限NEILREN.COM站内搜索</span></div>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-body" style="padding:0;">
+                    <a href="http://s.click.taobao.com/t?e=m%3D2%26s%3DPR%2BOlLaTKDQcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAkb7NYrIxeG1Y6k3rLjTWi9RPAWXiEIX1TxQHrjNFTalbSf%2B87ojqk2LgAZg3aAQSudn1BbglxZYxUhy8exlzcq9AmARIwX9K%2BnbtOD3UdznPV1H2z0iQv9NkKVMHClW0QbMqOpFMIvnvjQXzzpXdTHGJe8N%2FwNpGw%3D%3D" target="_blank" rel="nofollow">
+                        <img src="//cdn.neilren.com/Advert/Aliyun/440-180.gif" width="100%" />
+                    </a>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>最近的文章</h3>
+                    <div class="links small">
+                        @for (int i = 0; i < Model.RecentArticle.Count; i++)
+                        {
+                            <a href="/Article/@Model.RecentArticle[i].ArticleID">@Model.RecentArticle[i].ArticleTitle</a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>热评文章</h3>
+                    <div class="links small">
+                        <ul class="ds-top-threads" data-range="monthly" data-num-items="10" style="padding:0;"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-body">
+                    <h3>友情链接</h3>
+                    @for (int i = 0; i < Model.FLink.Count; i++)
+                    {
+                        <a href="@Model.FLink[i].Link" target="_blank"><span class="label label-success">@Model.FLink[i].LinkName</span></a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
